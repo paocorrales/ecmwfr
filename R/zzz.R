@@ -20,6 +20,7 @@ wf_server <- function(id, service = "cds") {
   cds_url <- "https://cds.climate.copernicus.eu/api"
   ads_url <- "https://ads.atmosphere.copernicus.eu/api"
   cems_url <- "https://ewds.climate.copernicus.eu/api"
+  xds_url <- "https://xds-preprod.ecmwf.int/api"
 
   # return url depending on service or id
   switch(
@@ -38,7 +39,12 @@ wf_server <- function(id, service = "cds") {
       return(cems_url)
     } else {
       return(paste0(cems_url,"/retrieve/v1/", "jobs/", id))
-    }
+    },
+  "xds" = if (missing(id)) {
+    return(cems_url)
+  } else {
+    return(paste0(xds_url,"/retrieve/v1/", "jobs/", id))
+  }
   )
 
   stop("No server for the service found")

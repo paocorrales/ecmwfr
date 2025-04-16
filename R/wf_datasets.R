@@ -26,7 +26,7 @@
 #'}
 
 wf_datasets <- memoise::memoise(function(
-  service = c("cds","ads","cems"),
+  service = c("cds","ads","cems","xds"),
   simplify = TRUE
   ){
 
